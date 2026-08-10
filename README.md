@@ -84,6 +84,6 @@ dotnet run
    Está incompleto: Nos falta el campo "Completada" para las tareas.
    Qué tratamiento o aproximación podrías sugerir para tratar los datos y poder importarlos? Qué riesgos hay?
 
-2. Qué es un IQueryable, qué particularidad tiene?
+2. Qué es un IQueryable, qué particularidad tiene? Cómo se forma y qué se puede hacer con él?
 
 3. Qué está haciendo el Select dentro de las queries, y por qué se está implementando el DTO?
