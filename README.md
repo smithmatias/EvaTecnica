@@ -1,7 +1,7 @@
 # EvaluacionDev
 
-API en .NET 8 + frontend en React/TypeScript para evaluacion tecnica.
-Duracion: ~90 minutos
+API en .NET 8 + frontend en React/TypeScript.
+Esta guia explica como levantar los dos proyectos.
 
 ## Stack
 
@@ -37,8 +37,7 @@ EvaTecnica/
 
 - SQLite local, archivo `backend/evaluaciondev.db`
 - Connection string en `backend/appsettings.json`: `Data Source=evaluaciondev.db`
-- El archivo **no esta versionado**: se crea solo en el primer arranque con los datos
-  de ejemplo. Para volver al estado inicial, borralo y volve a levantar la API.
+- El archivo **no esta versionado**: se crea solo en el primer arranque, con datos de ejemplo
 
 ## Como levantarlo
 
@@ -89,54 +88,10 @@ cd ../frontend && npm install
 | GET | `/api/Tareas/usuarios` |
 | POST | `/api/Tareas/usuarios` |
 
-## Nota
+## Si algo no arranca
 
-Hay casos intencionales en el codigo que forman parte de la evaluacion.
-
----
-
-# Enunciados — Backend
-
-## Practica
-
-1. Actualizar una tarea devuelve 200, pero no actualiza correctamente el dato.
-   Validar y corregir.
-
-2. Intento crear un usuario con el siguiente correo: `matias@example.com`
-   Pero esta dando error, no se por que. Se pide validar y corregir el error.
-   En base a lo que concluyas, ¿que deberia pasar?
-
-3. Al endpoint que trae todas las tareas, se pide filtrar el resultado para solo traer:
-   - Tareas completadas
-   - Tareas con una descripcion no vacia ni nula
-
-4. Al endpoint que trae todas las tareas, se pide agregar parametros opcionales.
-   Se pide poder indicarle un `usuarioId`. Lo mismo para titulo (contains).
-
-## Teoria
-
-1. Importacion de backup de tareas sin el campo "Completada": ¿tratamiento y riesgos?
-2. ¿Que es un `IQueryable`, que particularidad tiene? ¿Como se forma y que se puede hacer con el?
-3. ¿Que esta haciendo el `Select` dentro de las queries, y por que se esta implementando el DTO?
-
----
-
-# Enunciados — Frontend
-
-## Practica
-
-1. **`src/components/ListaTareas.tsx`** — Este componente anda bien cuando todo sale bien.
-   Antes de tocar nada: ¿que ve el usuario si la API tarda 4 segundos? ¿Y si esta caida?
-   ¿Y si no hay ninguna tarea cargada?
-
-2. **`src/components/AgregarTarea.tsx`** — Reporte del usuario: *"Agrego una tarea, la
-   pantalla no cambia. Pero si refresco el navegador, la tarea esta. ¿Que pasa?"*
-
-3. **Alta de usuario** — Arma un formulario para dar de alta un usuario. Pega contra
-   `POST /api/Tareas/usuarios` con `{ nombre, email, activo }`. El hueco esta marcado
-   en `src/App.tsx`.
-
-## Teoria
-
-1. Mira `src/types.ts`: ¿por que `fechaVencimiento` esta tipado como `string` si es una fecha?
-2. ¿Por que validar en el front si el back tambien valida?
+- **La API no levanta / puerto 5153 ocupado:** revisar que no haya otra instancia corriendo.
+- **El front carga pero no trae datos:** falta levantar la API. El front le pega a traves del
+  proxy, asi que sin backend las listas quedan vacias.
+- **Volver al estado inicial de los datos:** parar la API, borrar `backend/evaluaciondev.db`
+  y volver a levantarla.
