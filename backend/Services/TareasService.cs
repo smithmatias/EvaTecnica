@@ -50,6 +50,33 @@ public class TareasService : ITareasService
             .FirstOrDefaultAsync();
     }
 
+    public async Task<TareaDTO> CreateAsync(CreateTareaDTO createTareaDto)
+    {
+        var nuevaTarea = new Tarea
+        {
+            Titulo = createTareaDto.Titulo,
+            Descripcion = createTareaDto.Descripcion,
+            Completada = false,
+            FechaCreacion = DateTime.UtcNow,
+            FechaVencimiento = createTareaDto.FechaVencimiento,
+            UsuarioId = createTareaDto.UsuarioId
+        };
+
+        _context.Tareas.Add(nuevaTarea);
+        await _context.SaveChangesAsync();
+
+        return new TareaDTO
+        {
+            Id = nuevaTarea.Id,
+            Titulo = nuevaTarea.Titulo,
+            Descripcion = nuevaTarea.Descripcion,
+            Completada = nuevaTarea.Completada,
+            FechaCreacion = nuevaTarea.FechaCreacion,
+            FechaVencimiento = nuevaTarea.FechaVencimiento,
+            UsuarioId = nuevaTarea.UsuarioId
+        };
+    }
+
     public async Task<bool> DeleteAsync(int id)
     {
         Tarea? tarea = await _context.Tareas.FirstOrDefaultAsync(t => t.Id == id);
@@ -117,6 +144,21 @@ public class TareasService : ITareasService
             FechaVencimiento = tarea.FechaVencimiento,
             UsuarioId = tarea.UsuarioId
         };
+    }
+
+    public async Task<IEnumerable<UsuarioDTO>> GetUsuariosAsync()
+    {
+        return await _context.Usuarios
+            .AsNoTracking()
+            .Select(u => new UsuarioDTO
+            {
+                Id = u.Id,
+                Nombre = u.Nombre,
+                Email = u.Email,
+                Activo = u.Activo,
+                FechaAlta = u.FechaAlta
+            })
+            .ToListAsync();
     }
 
     public async Task<UsuarioDTO> CreateUsuarioAsync(CreateUsuarioDTO createUsuarioDto)

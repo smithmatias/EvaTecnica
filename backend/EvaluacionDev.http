@@ -1,6 +1,45 @@
 @EvaluacionDev_HostAddress = http://localhost:5153
 
-GET {{EvaluacionDev_HostAddress}}/weatherforecast/
+### Listar todas las tareas
+GET {{EvaluacionDev_HostAddress}}/api/Tareas
 Accept: application/json
 
-###
+### Obtener una tarea
+GET {{EvaluacionDev_HostAddress}}/api/Tareas/1
+Accept: application/json
+
+### Crear una tarea
+POST {{EvaluacionDev_HostAddress}}/api/Tareas
+Content-Type: application/json
+
+{
+  "titulo": "Tarea nueva",
+  "descripcion": "Creada desde el archivo .http",
+  "fechaVencimiento": null,
+  "usuarioId": 1
+}
+
+### Actualizar parcialmente una tarea
+PATCH {{EvaluacionDev_HostAddress}}/api/Tareas/1
+Content-Type: application/json
+
+{
+  "completada": true
+}
+
+### Eliminar una tarea
+DELETE {{EvaluacionDev_HostAddress}}/api/Tareas/1
+
+### Listar usuarios
+GET {{EvaluacionDev_HostAddress}}/api/Tareas/usuarios
+Accept: application/json
+
+### Crear un usuario
+POST {{EvaluacionDev_HostAddress}}/api/Tareas/usuarios
+Content-Type: application/json
+
+{
+  "nombre": "Nuevo Usuario",
+  "email": "nuevo@example.com",
+  "activo": true
+}

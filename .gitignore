@@ -13,3 +13,14 @@ obj/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Frontend
+node_modules/
+dist/
+.env
+.env.local
+
+# Base de datos local (la recrea EnsureCreated en cada arranque)
+*.db
+*.db-shm
+*.db-wal

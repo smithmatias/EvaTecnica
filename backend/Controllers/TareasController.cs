@@ -22,7 +22,7 @@ public class TareasController : ControllerBase
         return Ok(tareas);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     public async Task<ActionResult<TareaDTO>> GetById(int id)
     {
         TareaDTO? tarea = await _tareasService.GetByIdAsync(id);
@@ -32,6 +32,13 @@ public class TareasController : ControllerBase
         }
 
         return Ok(tarea);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<TareaDTO>> CreateTarea([FromBody] CreateTareaDTO createTareaDto)
+    {
+        TareaDTO tareaCreada = await _tareasService.CreateAsync(createTareaDto);
+        return StatusCode(StatusCodes.Status201Created, tareaCreada);
     }
 
     [HttpDelete("{id:int}")]
@@ -56,6 +63,13 @@ public class TareasController : ControllerBase
         }
 
         return Ok(tarea);
+    }
+
+    [HttpGet("usuarios")]
+    public async Task<ActionResult<IEnumerable<UsuarioDTO>>> GetUsuarios()
+    {
+        IEnumerable<UsuarioDTO> usuarios = await _tareasService.GetUsuariosAsync();
+        return Ok(usuarios);
     }
 
     [HttpPost("usuarios")]

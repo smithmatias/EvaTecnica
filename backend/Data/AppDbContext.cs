@@ -12,6 +12,8 @@ public class AppDbContext : DbContext
     public DbSet<Tarea> Tareas => Set<Tarea>();
     public DbSet<Usuario> Usuarios => Set<Usuario>();
 
+    private static readonly DateTime FechaBase = new DateTime(2026, 1, 15, 9, 0, 0, DateTimeKind.Utc);
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Usuario>()
@@ -31,7 +33,7 @@ public class AppDbContext : DbContext
                 Nombre = "Matias",
                 Email = "matias@example.com",
                 Activo = true,
-                FechaAlta = DateTime.UtcNow
+                FechaAlta = FechaBase
             },
             new Usuario
             {
@@ -39,7 +41,7 @@ public class AppDbContext : DbContext
                 Nombre = "Lucia",
                 Email = "lucia@example.com",
                 Activo = true,
-                FechaAlta = DateTime.UtcNow
+                FechaAlta = FechaBase
             }
         );
 
@@ -50,8 +52,8 @@ public class AppDbContext : DbContext
                 Titulo = "Preparar evaluacion tecnica",
                 Descripcion = "Armar API base para CRUD",
                 Completada = false,
-                FechaCreacion = DateTime.UtcNow,
-                FechaVencimiento = DateTime.UtcNow.AddDays(7),
+                FechaCreacion = FechaBase,
+                FechaVencimiento = FechaBase.AddDays(7),
                 UsuarioId = 1
             },
             new Tarea
@@ -60,8 +62,48 @@ public class AppDbContext : DbContext
                 Titulo = "Revisar candidatos",
                 Descripcion = "Validar ejercicio entregado",
                 Completada = false,
-                FechaCreacion = DateTime.UtcNow,
-                FechaVencimiento = DateTime.UtcNow.AddDays(3),
+                FechaCreacion = FechaBase,
+                FechaVencimiento = FechaBase.AddDays(3),
+                UsuarioId = 2
+            },
+            new Tarea
+            {
+                Id = 3,
+                Titulo = "Documentar endpoints",
+                Descripcion = "Escribir el README de la API",
+                Completada = true,
+                FechaCreacion = FechaBase,
+                FechaVencimiento = FechaBase.AddDays(1),
+                UsuarioId = 1
+            },
+            new Tarea
+            {
+                Id = 4,
+                Titulo = "Migrar base de datos",
+                Descripcion = null,
+                Completada = false,
+                FechaCreacion = FechaBase,
+                FechaVencimiento = null,
+                UsuarioId = 2
+            },
+            new Tarea
+            {
+                Id = 5,
+                Titulo = "Revisar accesos",
+                Descripcion = "",
+                Completada = true,
+                FechaCreacion = FechaBase,
+                FechaVencimiento = FechaBase.AddDays(10),
+                UsuarioId = 1
+            },
+            new Tarea
+            {
+                Id = 6,
+                Titulo = "Actualizar dependencias",
+                Descripcion = "Subir paquetes a la ultima version",
+                Completada = true,
+                FechaCreacion = FechaBase,
+                FechaVencimiento = FechaBase.AddDays(15),
                 UsuarioId = 2
             }
         );
