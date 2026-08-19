@@ -1,0 +1,28 @@
+{
+  "name": "EvaluacionDev",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:1-8.0",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "22" }
+  },
+
+  "postCreateCommand": "cd backend && dotnet restore && cd ../frontend && npm install",
+
+  "forwardPorts": [5153, 5173],
+  "portsAttributes": {
+    "5153": { "label": "API" },
+    "5173": { "label": "Frontend", "onAutoForward": "openBrowser" }
+  },
+
+  "hostRequirements": { "cpus": 2 },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csharp",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
+}
